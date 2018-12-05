@@ -21,7 +21,7 @@ module.exports = {
     entry: SRC_DIR + '/app/index.js',
     output: {
         path: DIST_DIR,
-        filename: '[name].[chunkhash].js',
+        filename: '[name].[hash].js',
     },
     optimization: {
         splitChunks: {
