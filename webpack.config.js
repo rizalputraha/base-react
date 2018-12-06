@@ -21,31 +21,9 @@ module.exports = {
     entry: SRC_DIR + '/app/index.js',
     output: {
         path: DIST_DIR,
-        filename: '[name].[hash].js',
+        filename: '[name].js',
     },
-    optimization: {
-        splitChunks: {
-            chunks: 'async',
-            minSize: 30000,
-            maxSize: 0,
-            minChunks: 1,
-            maxAsyncRequests: 5,
-            maxInitialRequests: 3,
-            automaticNameDelimiter: '~',
-            name: true,
-            cacheGroups: {
-                vendors: {
-                    test: /[\\/]node_modules[\\/]/,
-                    priority: -10
-                },
-                default: {
-                    minChunks: 2,
-                    priority: -20,
-                    reuseExistingChunk: true
-                }
-            }
-        },
-    },
+    mode: process.env.NODE_ENV || 'development',
     module: {
         rules: [
             {
@@ -57,37 +35,49 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                include: path.SRC_DIR,
+                include: SRC_DIR,
                 loaders: ["style-loader", "css-loader"]
             },
             {
                 test: /\.scss$/,
-                include: path.SRC_DIR,
+                include: SRC_DIR,
                 loaders: ["style-loader", "css-loader", "sass-loader"]
             },
         ]
     },
+    // optimization: {
+    //     // Automatically split vendor and commons
+    //     // https://twitter.com/wSokra/status/969633336732905474
+    //     // https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
+    //     splitChunks: {
+    //         chunks: 'all',
+    //         name: false,
+    //     },
+    //     // Keep the runtime chunk seperated to enable long term caching
+    //     // https://twitter.com/wSokra/status/969679223278505985
+    //     runtimeChunk: true,
+    // },
     devServer: {
-        contentBase: DIST_DIR,
+        watchContentBase: true,
+        contentBase: SRC_DIR,
         compress: true,
-        port: 8080
+        port: 8080,
+        hot: true
     },
     plugins: [
-        new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('production')
-        }),
-        new UglifyJSPlugin({
-            include: /dist/,
-        }),
+        // new UglifyJSPlugin({
+        //     include: /dist/,
+        // }),
         new HtmlWebpackPlugin({
-            template: DIST_DIR + '/index.html',
-            filename: 'index.html'
+            template: './build/index.html',
+            filename: 'index.html',
+            inject: true
         }),
-        new OfflinePlugin({
-            ServiceWorker: {
-                minify: true,
-            }
-        })
+        // new OfflinePlugin({
+        //     ServiceWorker: {
+        //         minify: true,
+        //     }
+        // }),
     ],
 
 };
