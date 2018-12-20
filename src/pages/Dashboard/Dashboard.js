@@ -12,7 +12,7 @@ import HeaderNav from '../../components/HeaderNav/HeaderNav';
 import SidebarMenu from '../../components/SidebarMenu/SidebarMenu';
 import SidebarParent from '../../components/SidebarParent/SidebarParent';
 
-import './Dashboard.css';
+import './Dashboard.scss';
 import CardPages from '../Card/CardPages';
 
 export default class Dashboard extends Component {
