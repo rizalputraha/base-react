@@ -97,11 +97,14 @@ export default class Dashboard extends Component {
                                 <Route path={`${this.props.match.path}/test`} component={Test} />
                             </div>
                         </Content>
-                        <Footer style={{ textAlign: 'center' }}>
+                        <Footer className="test123 footerv2">
                             Ant Design ©2018 Created by Ant UED
                         </Footer>
                     </Layout>
                 </Layout>
+                <div className='test'>
+                    <p className='sup'>WHATSUPPPPP</p>
+                </div>
             </div>
         )
     }
