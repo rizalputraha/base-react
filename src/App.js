@@ -3,6 +3,8 @@ import {
   Route,
 } from 'react-router-dom';
 
+import { message } from 'antd';
+
 import Login from "./pages/Login/Login";
 import Dashboard from './pages/Dashboard/Dashboard';
 
