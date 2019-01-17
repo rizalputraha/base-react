@@ -12,9 +12,9 @@ import Dashboard from './pages/Dashboard/Dashboard';
 class App extends Component {
   render() {
     if (navigator.onLine) {
-      console.log('online');
+      message.info('App is online.');
     } else {
-      console.log('offline');
+      message.info('App is offline.');
     }
     return (
       <div className="App">
