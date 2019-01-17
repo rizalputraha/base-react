@@ -4,6 +4,7 @@ import {
 } from 'react-router-dom';
 
 import { message } from 'antd';
+import { Offline, Online } from 'react-detect-offline';
 
 import Login from "./pages/Login/Login";
 import Dashboard from './pages/Dashboard/Dashboard';
@@ -13,17 +14,17 @@ import Dashboard from './pages/Dashboard/Dashboard';
 
 class App extends Component {
   render() {
-    if (navigator.onLine) {
-      message.info('App is online.');
-    } else {
-      message.info('App is offline.');
-    }
     return (
       <div className="App">
-        <div>
-          <Route exact path="/" component={Login} />
-          <Route path="/dashboard" component={Dashboard} />
-        </div>
+        <Offline>
+          {message.info('Your in Offline !')}
+        </Offline>
+        <Online>
+          <div>
+            <Route exact path="/" component={Login} />
+            <Route path="/dashboard" component={Dashboard} />
+          </div>
+        </Online>
       </div>
 
     );
